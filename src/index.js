@@ -1,10 +1,7 @@
 import * as config from '../config/config';
-import { User, Product } from './models/index';
+import * as models from './models';
 
-function main() {
-    console.log(config.name);
-    let user = new User();
-    let product = new Product();
-}
+console.log(config.name);
+const user = new models.User();
+const product = new models.Product();
 
-main();

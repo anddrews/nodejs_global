@@ -1,8 +1,6 @@
 
-class Product {
+export class Product {
     constructor() {
         console.log('Product instance created');
     }
 }
-
-export default Product;

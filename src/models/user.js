@@ -1,8 +1,6 @@
 
-class User {
+export class User {
     constructor() {
         console.log('User instance created');
     }
 }
-
-export default User;
