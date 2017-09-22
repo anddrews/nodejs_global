@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import fs from 'fs';
 
 export class DirWatcher extends EventEmitter {
-    constructor ( path, delay ) {
+    constructor (path, delay) {
         super();
         this.delay = delay;
         this.path = path;
@@ -11,7 +11,7 @@ export class DirWatcher extends EventEmitter {
         this.counter = 0;
     }
     watch() {
-        fs.watch( this.path, ( event, fileName ) => {
+        fs.watch( this.path, (event, fileName) => {
             this.fileName = fileName;
             this.event = event;
             const e = {
@@ -19,7 +19,7 @@ export class DirWatcher extends EventEmitter {
                 path: this.path,
                 fileName: this.fileName,
             };
-            if ( event === 'change' && ++this.counter === 2 ) {
+            if (event === 'change' && ++this.counter === 2) {
                 setTimeout(() => {
                     this.counter = 0;
                     this.emit( 'changed', null, e);
