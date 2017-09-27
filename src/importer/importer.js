@@ -2,23 +2,23 @@ import fs from 'fs';
 import { promisify } from 'util';
 
 export class Importer {
-    constructot (watcher) {
-        this.watcher = watcher;
-        this.watcher.watch();
-        this.files = [];
-        console.log('this watcher');
-        this.watcher.on( 'changed', (err, e) => {
-            this.files.put( e.path + '/' + e.fileName );
-            console.log('importer event');
-        });
+    constructor(dirWatcher) {
+        this.dirWatcher = dirWatcher;
+        this.asincReader = promisify(fs.readFile);
     }
     
-    import( path ) {
-        const readFileAsync = promisify(fs.readFile);
-        return readFileAsync(path);
-        
+    import(fileName) {
+        this.dirWatcher.watch();
+        return new Promise((resolve, reject) => {
+            this.dirWatcher.on('changed', (err, res) => {
+                if (err || res.fileList.indexOf(fileName) === -1) {
+                    reject({err: 'file not found or other problem'});
+                } else {
+                    this.asincReader(res.dirPath + '/' + fileName)
+                        .then((data) => resolve(data.toString()))
+                        .catch(()=> reject({err: 'some problem in file reading'}));
+                }
+            })
+        })
     }
-    
-    
-    
 }
