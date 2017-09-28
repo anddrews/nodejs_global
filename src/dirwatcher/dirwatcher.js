@@ -7,7 +7,6 @@ export class DirWatcher extends EventEmitter {
         this.delay = delay;
         this.path = path;
         this.files = [];
-        this.event = null;
         this.counter = 0;
         this.watcher = null;
         this.isDirChanged = false;
@@ -16,7 +15,9 @@ export class DirWatcher extends EventEmitter {
         if(!this.watcher) {
             this.watcher = fs.watch(this.path, (e, fileName) => {
                 if (e === 'change' && ++this.counter === 2) {
-                    this.files.push(fileName);
+                    if(this.files.indexOf(fileName) === -1) {
+                        this.files.push(fileName);
+                    }
                     this.isDirChanged = true;
                     this.counter = 0;
                 }
@@ -32,5 +33,11 @@ export class DirWatcher extends EventEmitter {
                 this.isDirChanged = false;
             }
         }, this.delay);
+    }
+    getListFiles() {
+        return this.files;
+    }
+    getDirPath() {
+        return this.path;
     }
 }
