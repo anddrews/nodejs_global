@@ -3,7 +3,7 @@ export class JSONConverter {
         const regExpValue = /^(\d+),(".+"|.+),(".+"|.+),(".+"|.+),(\S\d+\.\d+),(\d+-\S+)$/;
         const strArr = dataStr.split('\n');
         const propsName = strArr.shift().split(',');
-        strArr.length--;
+        if(!strArr[strArr.length]) {strArr.length--;}
         const result = strArr.map((item) => {
             let obj = {};
             propsName.forEach((el, index) => {

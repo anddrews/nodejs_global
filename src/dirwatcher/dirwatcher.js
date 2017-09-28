@@ -34,10 +34,4 @@ export class DirWatcher extends EventEmitter {
             }
         }, this.delay);
     }
-    getListFiles() {
-        return this.files;
-    }
-    getDirPath() {
-        return this.path;
-    }
 }

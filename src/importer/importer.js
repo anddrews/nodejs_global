@@ -13,7 +13,6 @@ export class Importer {
         this.dirWatcher.watch();
         return new Promise((resolve, reject) => {
             this.dirWatcher.on('changed', (err, res) => {
-                console.log(res.fileList);
                 if (err || res.fileList.indexOf(fileName) === -1) {
                     reject({err: 'file not found or other problem'});
                 } else {
@@ -25,13 +24,7 @@ export class Importer {
         })
     }
     importSync() {
-        let totalData = [];
-        for (let i = 0; i < files.length; i++) {
-            totalData = totalData.concat(utils.csvtojson(fs.readFileSync(`${path}\\${files[i]}`, {encoding: "utf-8"})));
-            console.log(totalData)
-        }
-        return totalData;
-        
-        
+        return this.dirWatcher.files.reduce((totalData, fileName) =>
+            totalData.concat(this.converter.toJSON(fs.readFileSync(this.dirWatcher.path + '/' + fileName, {encoding: "utf-8"} ))), []);
     }
 }

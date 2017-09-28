@@ -1,3 +1,5 @@
 {
-  "name": "NodeMP HW App"
+  "name": "NodeMP HW App",
+  "delayDirWatching" : "1000",
+  "dataDir": "D:/Trainings/nodejs_global/data"
 }
