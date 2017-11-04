@@ -1,21 +1,23 @@
 import express from 'express'
-import { DAO } from '../helpers';
+import { dao } from '../helpers';
+import { productsMiddleware } from '../middlewares';
 
-export const products = express.Router();
-const dao = new DAO();
+export const productsRouter = express.Router();
 
-products.get('/api/products', (req, res) => {
-    dao.getAllProducts().then((data) => { res.end(JSON.stringify(data))});
+productsRouter.use( productsMiddleware.extendReqNewProduct, productsMiddleware.isExistId, productsMiddleware.errorHandler);
+
+productsRouter.get('/', (req, res) => {
+    dao.getAllProducts().then((data) => { res.status(200).end(JSON.stringify(data))});
 });
 
-products.get('/api/products/:id', (req, res) => {
-    dao.getProductById(req.params.id).then((data) => { res.end(JSON.stringify(data))});
+productsRouter.get('/:id', (req, res) => {
+    dao.getProductById(req.params.id).then((data) => { res.status(200).json(data)});
 });
 
-products.get('/api/products/:id/reviews', (req, res) => {
-    dao.getReviewsById(req.params.id).then((data) => { res.end(JSON.stringify(data))});
+productsRouter.get('/:id/reviews', (req, res) => {
+    dao.getReviewsById(req.params.id).then((data) => { res.status(200).json(data)});
 });
 
-products.post('/api/products', (req, res) => {
-    dao.addNewProduct(req.newProduct).then((data) => { res.end(JSON.stringify(data)) });
+productsRouter.post('/', (req, res) => {
+    dao.addNewProduct(req.newProduct).then((data) => { res.status(201).json(data) });
 });

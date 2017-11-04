@@ -2,7 +2,7 @@ import { Importer } from '../importer';
 import { DirWatcher } from '../dirwatcher';
 import _ from 'underscore';
 
-export class DAO {
+class DAO {
     constructor() {
         this.products = [];
         
@@ -37,4 +37,18 @@ export class DAO {
             resolve(product);
         });
     }
+    
+    isExistId(id) {
+        return new Promise((resolve, reject) => {
+            this.getAllProducts().then((data) => {
+                if(_.filter(data, { id: id }).length) {
+                    resolve(true)
+                } else {
+                    reject(false)
+                }
+            }).catch((err) => { reject(err)});
+        })
+    }
 }
+
+export const dao = new DAO();

@@ -1,7 +1,7 @@
 import express from 'express'
 
-export const users = express.Router();
+export const usersRouter = express.Router();
 
-users.get('/api/users', (req, res,) => {
-    res.end('Users');
+usersRouter.get('/', (req, res,) => {
+    res.status(200).end('Users');
 });
