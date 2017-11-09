@@ -14,7 +14,7 @@ authRouter.post('/auth',(req, res) => {
 					role: user.role
 				};
 				const token = jwt.sign(currentUser, config.jwtSecret);
-				res.append('jwt-auth-token', token);
+				res.append('X-auth', token);
 				res.json({ code: 200, message: 'OK', token: 'JWT ' + token});
 			} else {
 				res.status(403).json({ status: 403, message: 'Wrong credential'});
