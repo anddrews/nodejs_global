@@ -1,7 +1,7 @@
 import { Product } from '../models';
 import { dao } from '../helpers';
 
-export const productsMiddleware ={
+export const productsMiddleware = {
     extendReqNewProduct: (req, res, next) => {
         const newProduct = new Product(req.body.id, req.body.name, req.body.brand, req.body.price, req.body.color, req.body.size);
         if(!newProduct) {
