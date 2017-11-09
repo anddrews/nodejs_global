@@ -13,7 +13,6 @@ export class Importer {
         this.dirWatcher.watch();
         return new Promise((resolve, reject) => {
             this.dirWatcher.on('changed', (err, res) => {
-                console.log(res.fileList);
                 if (err || res.fileList.indexOf(fileName) === -1) {
                     reject({err: 'file not found or other problem'});
                 } else {
@@ -23,6 +22,14 @@ export class Importer {
                 }
             })
         })
+    }
+    getExistFile(fileName) {
+        this.dirWatcher.watch();
+        return new Promise((resolve, reject) => {
+            this.asincReader(this.dirWatcher.getDirPath() + '/' + fileName)
+                .then((data) => resolve(this.converter.toJSON(data.toString())))
+                .catch(()=> reject({err: 'some problem in file reading'}));
+        });
     }
     importSync() {
         let totalData = [];
