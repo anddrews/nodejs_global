@@ -6,21 +6,21 @@ import jwt from 'jsonwebtoken';
 export const authRouter = express.Router();
 
 authRouter.post('/auth',(req, res) => {
-	console.log('get auth request');
 	dao.getUser(req.body.userName)
 		.then((user) => {
-		console.log(user);
 			if(user.password === req.body.password) {
 				const currentUser = {
 					name: user.name,
 					role: user.role
 				};
 				const token = jwt.sign(currentUser, config.jwtSecret);
-				res.json({ code: 200, message: 'OK', token: 'JWT' + token});
+				res.append('jwt-auth-token', token);
+				res.json({ code: 200, message: 'OK', token: 'JWT ' + token});
+			} else {
+				res.status(403).json({ status: 403, message: 'Wrong credential'});
 			}
 		})
 		.catch((err) => {
-		console.log(err);
 			res.status(404).json({ status: 404, message: err});
 		})
 });
