@@ -1,5 +1,6 @@
 {
   "name": "NodeMP HW App",
   "htmlTemplatePath": "./data/index.html",
-  "users": "[{'name': 'admin', 'login': 'qwerty'}]"
+  "users": "[{name: admin, password: qwerty, role: admin}]",
+  "jwtSecret": "bla bla"
 }

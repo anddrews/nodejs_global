@@ -1,11 +1,12 @@
 import { Importer } from '../importer';
 import { DirWatcher } from '../dirwatcher';
 import _ from 'underscore';
+import  * as config from '../../config/config.json';
 
 class DAO {
     constructor() {
         this.products = [];
-        
+        this.users = [];
     }
     
     getAllProducts() {
@@ -48,6 +49,17 @@ class DAO {
                 }
             }).catch((err) => { reject(err)});
         })
+    }
+    getUser(userName) {
+        return new Promise((resolve, reject) => {
+            console.log('config ' + JSON.stringify(config));
+            const currentUser = _.filter(config.users, { name: userName})[0];
+            if(currentUser) {
+                resolve(currentUser);
+            } else {
+                reject("user doesn't exist");
+            }
+		})
     }
 }
 
