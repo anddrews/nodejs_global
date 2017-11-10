@@ -4,6 +4,8 @@ import { dao } from '../helpers';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import FacebookStrategy from 'passport-facebook';
+
 
 export const authRouter = express.Router();
 
@@ -46,6 +48,19 @@ passport.use(new LocalStrategy((userName, password, done) => {
     }
 ));
 
+passport.use(new FacebookStrategy({
+        clientID: '356414384828920',
+        clientSecret: '554840cadc1b8a05b6db971416600ac5',
+        callbackURL: "http://localhost:3000/auth/facebook/callback"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+        	console.log(user);
+            return cb(err, user);
+        });
+    }
+));
+
 authRouter.post('/authpassport', passport.authenticate('local', {session: false}),(req, res) => {
 	console.log(req);
     const token = jwt.sign(req.user, config.jwtSecret);
@@ -53,5 +68,9 @@ authRouter.post('/authpassport', passport.authenticate('local', {session: false}
     res.json({ code: 200, message: 'OK', token: 'JWT ' + token});
 });
 
+authRouter.get('/auth/facebook',
+    passport.authenticate('facebook'), (req, res) => {
+		console.log('logined');
+	});
 
 
