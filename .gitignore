@@ -1,5 +1,5 @@
 #dist folder
-dist
-data
-utils
-node_modules
+/dist
+/utils
+/node_modules
+/.idea
