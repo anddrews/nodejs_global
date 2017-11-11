@@ -1,11 +1,21 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { productsRouter, usersRouter } from './routes';
-import { authRouter, checkAuthJWT } from './middlewares';
+import { authRouter, isLoggedUser } from './middlewares';
+import session from 'express-session';
+import passport from 'passport';
 
 export const app = express();
 
+
+
 app.use(cookieParser(), express.urlencoded({ extended: true }));
+app.use(session({
+	secret: 'ilovescotchscotchyscotchscotch',
+	resave: true,
+	saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', authRouter);
-app.use('/api/products', checkAuthJWT, productsRouter);
-app.use('/api/users', checkAuthJWT, usersRouter);
+app.use('/api/products', isLoggedUser, productsRouter);
+app.use('/api/users',  isLoggedUser, usersRouter);
