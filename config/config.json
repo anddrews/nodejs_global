@@ -1,4 +1,5 @@
 {
   "name": "NodeMP HW App",
-  "htmlTemplatePath": "./data/index.html"
+  "htmlTemplatePath": "./data/index.html",
+  "jwtSecret": "bla bla"
 }

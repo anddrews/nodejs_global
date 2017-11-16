@@ -5,8 +5,9 @@ import _ from 'underscore';
 class DAO {
     constructor() {
         this.products = [];
-        
-    }
+        this.users = [{name: 'admin', password: 'qwerty', role: 'admin'}];
+
+	}
     
     getAllProducts() {
         return new Promise((resolve, reject) => {
@@ -48,6 +49,16 @@ class DAO {
                 }
             }).catch((err) => { reject(err)});
         })
+    }
+    getUser(userName) {
+        return new Promise((resolve, reject) => {
+            const currentUser = _.filter(this.users, { name: userName})[0];
+            if(currentUser) {
+                resolve(currentUser);
+            } else {
+                reject("user doesn't exist");
+            }
+		})
     }
 }
 
