@@ -1,0 +1,13 @@
+version: '2'
+services:
+  postgres:
+     image: postgres:9.6-alpine
+     build:
+       context: .
+       dockerfile: dockerfile-postgres
+     ports:
+       - '5433:5432'
+     environment:
+       POSTGRES_DB: 'nodejs_training'
+       POSTGRES_USER: 'postgres'
+       POSTGRES_PASSWORD: 'password'

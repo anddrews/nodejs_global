@@ -1,5 +1,26 @@
 {
   "name": "NodeMP HW App",
   "htmlTemplatePath": "./data/index.html",
-  "jwtSecret": "bla bla"
+  "jwtSecret": "bla bla",
+  "development": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "nodejs_training",
+    "host": "127.0.0.1:5433",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "nodejs_training",
+    "host": "127.0.0.1:5433",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "nodejs_training",
+    "host": "127.0.0.1:5433",
+    "dialect": "postgres"
+  }
 }
