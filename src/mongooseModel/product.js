@@ -15,7 +15,8 @@ const productSchemaMongo = new mongoose.Schema({
     options: {
         color: String,
         size: String
-        }
+    },
+    lastModifiedDate: Date
 });
 
 export const Product = mongoose.model('Product', productSchemaMongo);

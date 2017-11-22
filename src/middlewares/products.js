@@ -7,7 +7,7 @@ export const productsMiddleware = {
         if(!newProduct) {
             next('Wrong data for model');
         } else {
-            req.newProduct = newProduct;
+            req.newItem = newProduct;
             res.status(404);
             next();
         }
@@ -26,6 +26,12 @@ export const productsMiddleware = {
         } else {
             next();
         }
+    },
+    extendObjectWithLastModifiedData: (req, res, next) => {
+        if (req.method === 'POST' || req.method === 'PUT') {
+            req.newItem.lastModifiedDate = new Date();
+        }
+        next();
     },
     errorHandler: (err, req, res, next ) => {
         next(err);
