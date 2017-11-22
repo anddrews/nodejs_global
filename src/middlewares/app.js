@@ -1,6 +1,6 @@
 import express from 'express';
 import * as config from '../../config/config.json';
-import { dao } from '../helpers';
+import { daoMongo as dao } from '../helpers';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';

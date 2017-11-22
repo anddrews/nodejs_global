@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { productsRouter, usersRouter } from './routes';
+import { productsRouter, usersRouter, citiesRouter } from './routes';
 import { authRouter, isLoggedUser } from './middlewares';
 import session from 'express-session';
 import passport from 'passport';
@@ -19,3 +19,4 @@ app.use(passport.session());
 app.use('/', authRouter);
 app.use('/api/products', isLoggedUser, productsRouter);
 app.use('/api/users',  isLoggedUser, usersRouter);
+app.use('/api/cities', citiesRouter);

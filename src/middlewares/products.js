@@ -1,5 +1,5 @@
 import { Product } from '../models';
-import { dao } from '../helpers';
+import { daoMongo as dao } from '../helpers';
 
 export const productsMiddleware = {
     extendReqNewProduct: (req, res, next) => {

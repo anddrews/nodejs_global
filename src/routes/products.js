@@ -1,5 +1,5 @@
 import express from 'express'
-import { dao } from '../helpers';
+import { daoMongo as dao } from '../helpers';
 import { productsMiddleware } from '../middlewares';
 
 export const productsRouter = express.Router();
@@ -27,5 +27,10 @@ productsRouter.get('/:id/reviews', (req, res) => {
 productsRouter.post('/', (req, res) => {
     dao.addNewProduct(req.newProduct)
         .then((data) => { res.status(201).json(data) })
+        .catch((err) => {res.status(404).end('Something gone wrong')});
+});
+productsRouter.delete('/:id', (req, res) => {
+    dao.deleteProductById(req.params.id)
+        .then((data) => { res.status(201).json('product was successful deleted' + data) })
         .catch((err) => {res.status(404).end('Something gone wrong')});
 });
