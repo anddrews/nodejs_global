@@ -1,2 +1,14 @@
-CREATE TABLE users (id integer, userName string, lastName string, email string, password string;
+CREATE TABLE users (id integer, userName text, lastName text, email text, password text);
 INSERT INTO users VALUES (1, 'admin', 'bestAdmin', 'admin@mail.ru', 'qwerty');
+INSERT INTO users VALUES (2, 'user', 'bestUser', 'user@mail.ru', 'qwerty');
+INSERT INTO users VALUES (3, 'guest', 'bestGuest', 'guest@mail.ru', 'qwerty');
+CREATE TABLE productOptions (id integer, color varchar, productSize varchar, PRIMARY KEY (id));
+CREATE TABLE products ( id integer, productName text, brand text, price decimal, productOptions integer, FOREIGN KEY (productOptions) REFERENCES productOptions(id));
+INSERT INTO productOptions VALUES (1, 'Orange', 'Xl');
+INSERT INTO productOptions VALUES (2, 'Green', 'l');
+INSERT INTO productOptions VALUES (3, 'Blue', 'M');
+INSERT INTO productOptions VALUES (4, 'Red', 'XXL');
+INSERT INTO products VALUES (1, 'Suprem T-shirt', 'Suprem', 99.99, 1);
+INSERT INTO products VALUES (2, 'Suprem Shirt', 'Suprem', 52, 2);
+INSERT INTO products VALUES (3, 'Valentine T-shirt', 'Valentine', 99.99, 3);
+INSERT INTO products VALUES (4, 'Valentine Shirt', 'Valentine', 99.99, 4);

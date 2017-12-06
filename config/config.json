@@ -4,21 +4,21 @@
   "jwtSecret": "bla bla",
   "development": {
     "username": "postgres",
-    "password": "qwerty",
+    "password": "password",
     "database": "nodejs_training",
     "host": "127.0.0.1:5433",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "qwerty",
+    "password": "password",
     "database": "nodejs_training",
     "host": "127.0.0.1:5433",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "qwerty",
+    "password": "password",
     "database": "nodejs_training",
     "host": "127.0.0.1:5433",
     "dialect": "postgres"

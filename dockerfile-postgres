@@ -1,2 +1,2 @@
-FROM postgress:9.6-alpine
+FROM postgres:9.6-alpine
 ADD createDb.sql /docker-entrypoint-initdb.d/
