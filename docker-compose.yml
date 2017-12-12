@@ -6,7 +6,7 @@ services:
        context: .
        dockerfile: dockerfile-postgres
      ports:
-       - '5433:5432'
+       - '5430:5432'
      environment:
        POSTGRES_DB: 'nodejs_training'
        POSTGRES_USER: 'postgres'

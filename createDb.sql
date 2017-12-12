@@ -1,9 +1,9 @@
-CREATE TABLE users (id integer, userName text, lastName text, email text, password text);
+CREATE TABLE users (id integer, "userName" text, "lastName" text, "email" text, "password" text, "createdAt" date, "updatedAt" date);
 INSERT INTO users VALUES (1, 'admin', 'bestAdmin', 'admin@mail.ru', 'qwerty');
 INSERT INTO users VALUES (2, 'user', 'bestUser', 'user@mail.ru', 'qwerty');
 INSERT INTO users VALUES (3, 'guest', 'bestGuest', 'guest@mail.ru', 'qwerty');
-CREATE TABLE productOptions (id integer, color varchar, productSize varchar, PRIMARY KEY (id));
-CREATE TABLE products ( id integer, productName text, brand text, price decimal, productOptions integer, FOREIGN KEY (productOptions) REFERENCES productOptions(id));
+CREATE TABLE productOptions (id integer, color varchar, "productSize" varchar, PRIMARY KEY (id));
+CREATE TABLE products ( id integer, "productName" text, "brand" text, price decimal, "productOptions" integer, FOREIGN KEY ("productOptions") REFERENCES productOptions(id));
 INSERT INTO productOptions VALUES (1, 'Orange', 'Xl');
 INSERT INTO productOptions VALUES (2, 'Green', 'l');
 INSERT INTO productOptions VALUES (3, 'Blue', 'M');

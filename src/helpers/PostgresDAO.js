@@ -1,9 +1,10 @@
 import _ from 'underscore';
-// import Pg from 'pg';
+import Pg from 'pg';
 import Sequelize from 'sequelize';
 import { Importer } from '../importer';
 import { DirWatcher } from '../dirwatcher';
 import * as config from '../../config/config.json';
+import { User } from '../models/user';
 
 // import { promisify } from 'util';
 
@@ -11,9 +12,17 @@ class DAO {
   constructor() {
     this.products = [];
     this.users = [{ name: 'admin', password: 'qwerty', role: 'admin' }];
-    // const connectString = 'postgres://admin:qwerty@localhost:5433/nodejs';
-    // this.pg = new Pg.Client(connectString);
-    this.sequelize = null; //new Sequelize(config.development);
+    // const connectString = 'postgres://postgres:password@localhost:5430/nodejs_training';
+    // const pg = new Pg.Client(connectString);
+    // pg.connect();
+    // pg.query('select * from users where id = 1').then(data => console.log(data)).catch( err => console.log('bad request'));
+    const seq = new Sequelize(config.development);
+    // seq.authenticate().then(() => console.log('postgres auth')).catch(err => console.log('error connection'));
+    // seq.query('select * from users where id = 1').then(data => console.log(data)).catch(err => console.log(err));
+    // console.log(new User(seq));
+    // const user = new User(seq);
+    // user.findOne({where: {id: 1}}).then(data => console.log(data.password)).catch(err => console.log('err'));
+    this.sequelize = seq;
     // this.pg.connect();
     // this.pg = pg;
   }
@@ -65,12 +74,13 @@ class DAO {
     //    if(currentUser) {
     //        resolve(currentUser);
     //    } else {
-    //        reject("user doesn't exist");
+    //        reject(user doesn't exist);
     //    }
     // })
     // return this.pg.query(`select * from users where username = ${userName}`);
-    console.log('ddd');
-    return this.sequelize('select * from users where username = "admin"');
+    return new User(this.sequelize).findOne({ where: { userName } });
+
+    // return this.sequelize.query('select * from users where username = admin');
   }
 }
 

@@ -6,7 +6,8 @@
     "username": "postgres",
     "password": "password",
     "database": "nodejs_training",
-    "host": "127.0.0.1:5433",
+    "host": "localhost",
+    "port": "5430",
     "dialect": "postgres"
   },
   "test": {
